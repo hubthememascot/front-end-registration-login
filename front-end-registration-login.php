@@ -599,7 +599,7 @@ function pippin_add_new_member() {
                   )
               )
           );
-          update_field( $event_field_key, $events, "user_".$user_id );
+          update_field( $event_field_key, $events, "user_".$new_user_id );
 
 
           //sendmail
