@@ -587,6 +587,22 @@ function pippin_add_new_member() {
 			
 			//user activation_link
 			if ( $new_user_id && !is_wp_error( $new_user_id ) ) {
+          //Add repeater field for donation_history (initialize after new reg)
+          $event_field_key = 'field_56a8a88487810';
+          $events[] = array(
+              'donation_history' => array(
+                  array(
+                      "donation_history_donated_by" => '',
+                      "donation_history_donated_amount_usd" => '',
+                      "donation_history_donated_currency" => '',
+                      "donation_history_donated_amount_in_currency" => ''
+                  )
+              )
+          );
+          update_field( $event_field_key, $events, "user_".$user_id );
+
+
+          //sendmail
 					$code = sha1( $new_user_id . time() );
 					$arr_params = array( 'activatekey' => $code, 'user' => $new_user_id );
 					$activation_link = add_query_arg( $arr_params, home_url('/activation/'));
